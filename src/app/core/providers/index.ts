@@ -1,0 +1,1 @@
+export { PokemonApiService } from './pokemon-api.service';
