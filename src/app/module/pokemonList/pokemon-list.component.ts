@@ -9,6 +9,13 @@ import { Component } from '@angular/core';
 })
 export class PokemonListComponent {
   public pokemonList: Pokemon[];
+  public filter: {
+    pokemonName: string,
+    type: string,
+    ability: string,
+    color: string,
+    generation: string,
+  }
   public loading = {
     isLoading: true,
     totalCount: 0,

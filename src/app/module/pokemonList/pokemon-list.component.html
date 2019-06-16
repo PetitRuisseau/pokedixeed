@@ -1,8 +1,9 @@
 
 <router-outlet></router-outlet>
 <main *ngIf="!loading.isLoading">
-  <ul>
-    <li *ngFor="let pokemon of pokemonList">
+    <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
+    <ul>
+      <li *ngFor="let pokemon of pokemonList | nameFilter: {name: filter.pokemonName, types: filter.pokemonName}">
       {{ pokemon.name }} 
       <ul>
         <li *ngFor="let type of pokemon.types">
