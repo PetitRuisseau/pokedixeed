@@ -3,20 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokemonApiService } from './core/providers';
+import { PokeapiService } from './core/providers';
 import { HttpClientModule } from '@angular/common/http';
+import { NameFilterPipe } from './shared/pipes/name-filter.pipe';
+import { FormsModule } from '@angular/forms';
+import { PokemonService } from './core/providers/pokemon.service';
+import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NameFilterPipe,
+    PokemonListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [
-    PokemonApiService
+    PokeapiService,
+    PokemonService
   ],
   bootstrap: [AppComponent]
 })
