@@ -1,15 +1,25 @@
-
-<router-outlet></router-outlet>
 <main *ngIf="!loading.isLoading">
-    <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
-    <ul>
-      <li *ngFor="let pokemon of pokemonList | nameFilter: {name: filter.pokemonName, types: filter.pokemonName}">
-      {{ pokemon.name }} 
-      <ul>
-        <li *ngFor="let type of pokemon.types">
-          {{ type }}
-        </li>
-      </ul>
+  <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
+  <select [(ngModel)]="filter.type">
+    <option value=""></option>
+    <option *ngFor="let type of selectList.types" [value]="type">{{ type }}</option>
+  </select>
+  <select [(ngModel)]="filter.ability">
+    <option value=""></option>
+    <option *ngFor="let ability of selectList.abilities" [value]="ability">{{ ability }}</option>
+  </select>
+  <select [(ngModel)]="filter.generation">
+    <option value=""></option>
+    <option *ngFor="let generation of selectList.generations" [value]="generation">{{ generation }}</option>
+  </select>
+  <select [(ngModel)]="filter.color">
+    <option value=""></option>
+    <option *ngFor="let color of selectList.colors" [value]="color">{{ color }}</option>
+  </select>
+  <ul>
+    <li *ngFor="let pokemon of pokemonList | nameFilter: {name: filter.pokemonName, types: filter.type, abilities: filter.ability, color: filter.color, generation: filter.generation}">
+      <img [src]="pokemon.sprites.front_default" />
+      {{ pokemon.name }}
     </li>
   </ul>
 </main>

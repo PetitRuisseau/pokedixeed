@@ -16,6 +16,12 @@ export class PokemonListComponent {
     color: string,
     generation: string,
   }
+  public selectList: {
+    types: string[],
+    abilities: string[],
+    colors: string[],
+    generations: string[],
+  }
   public loading = {
     isLoading: true,
     totalCount: 0,
@@ -24,18 +30,48 @@ export class PokemonListComponent {
   constructor(
     private pokemonService: PokemonService,
   ) {
+    this.pokemonList = []
+    this.selectList = {
+      types: [],
+      abilities: [],
+      colors: [],
+      generations: [],
+    }
+    this.filter = {
+      pokemonName: '',
+      type: '',
+      ability: '',
+      color: '',
+      generation: '',
+    }
     this.loadAllPokemon()
   }
 
   loadAllPokemon() {
+    if (true) {
+      this.pokemonService.getMockPokemon().subscribe(
+        response => {
+          this.pokemonList = response
+          this.loading.totalCount = this.pokemonList.length
+          this.pokemonList.forEach(pokemon => {
+            this.generateSelectList(pokemon)
+            this.loading.count += 1
+            if (this.loading.count == this.loading.totalCount) {
+              this.loading.isLoading = false
+            }
+          });
+        }
+      )
+      return 
+    }
     this.pokemonService.getAllPokemon().subscribe(
       response => {
-        this.pokemonList = []
         this.loading.totalCount = response.pokemon_entries.length
         response.pokemon_entries.forEach(pokemonPokedex => {
           this.pokemonService.getOnePokemon(pokemonPokedex.entry_number).subscribe(
             response => {
               this.pokemonList.push(response)
+              this.generateSelectList(response)
               this.loading.count += 1
               if (this.loading.count == this.loading.totalCount) {
                 this.loading.isLoading = false
@@ -45,5 +81,20 @@ export class PokemonListComponent {
         });
       }
     )
+  }
+
+  generateSelectList(pokemon: Pokemon) {
+    pokemon.types.forEach(type => {
+      if (this.selectList.types.indexOf(type) < 0)
+        this.selectList.types.push(type)
+    });
+    pokemon.abilities.forEach(ability => {
+      if (this.selectList.abilities.indexOf(ability) < 0)
+        this.selectList.abilities.push(ability)
+    });
+    if (this.selectList.generations.indexOf(pokemon.generation) < 0)
+      this.selectList.generations.push(pokemon.generation)
+    if (this.selectList.colors.indexOf(pokemon.color) < 0)
+      this.selectList.colors.push(pokemon.color)
   }
 }
