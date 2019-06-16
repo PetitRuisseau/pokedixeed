@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokeapiService } from './core/providers';
 import { HttpClientModule } from '@angular/common/http';
-import { NameFilterPipe } from './shared/pipes/name-filter.pipe';
+import { FiltersPipe } from './shared/pipes/filters.pipe';
 import { FormsModule } from '@angular/forms';
 import { PokemonService } from './core/providers/pokemon.service';
 import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
@@ -13,7 +13,7 @@ import { PokemonListComponent } from './module/pokemonList/pokemon-list.componen
 @NgModule({
   declarations: [
     AppComponent,
-    NameFilterPipe,
+    FiltersPipe,
     PokemonListComponent,
   ],
   imports: [

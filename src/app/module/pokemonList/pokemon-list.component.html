@@ -17,7 +17,16 @@
     <option *ngFor="let color of selectList.colors" [value]="color">{{ color }}</option>
   </select>
   <ul>
-    <li *ngFor="let pokemon of pokemonList | nameFilter: {name: filter.pokemonName, types: filter.type, abilities: filter.ability, color: filter.color, generation: filter.generation}">
+    <li 
+      *ngFor="
+        let pokemon of pokemonList
+        | filters: {
+          name: filter.pokemonName,
+          types: filter.type,
+          abilities: filter.ability,
+          color: filter.color,
+          generation: filter.generation
+        }">
       <img [src]="pokemon.sprites.front_default" />
       {{ pokemon.name }}
     </li>
