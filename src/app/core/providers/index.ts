@@ -1,1 +1,1 @@
-export { PokemonApiService } from './pokemon-api.service';
+export { PokeapiService } from './pokeapi.service';

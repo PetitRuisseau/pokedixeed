@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { PokemonApiConfig } from '../config/pokemon-api.config';
+import { PokeapiConfig } from '../config/pokeapi.config';
 import {
     PokedexResponse,
     PokemonResponse,
@@ -10,7 +10,7 @@ import {
 } from '../models';
 
 @Injectable()
-export class PokemonApiService {
+export class PokeapiService {
     private readonly header = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
         params: new HttpParams()
@@ -22,21 +22,21 @@ export class PokemonApiService {
 
     public getPokedexList(): Observable<PokedexResponse> {
         return this.httpClient.get<PokedexResponse>(
-            `${PokemonApiConfig.url}${PokemonApiConfig.endpoints.pokedex}`, 
+            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokedex}`, 
             this.header
         )
     }
 
-    public getPokemonDetails(id): Observable<PokemonResponse> {
+    public getPokemonDetails(id: number): Observable<PokemonResponse> {
         return this.httpClient.get<PokemonResponse>(
-            `${PokemonApiConfig.url}${PokemonApiConfig.endpoints.pokemon}${id}`, 
+            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokemon}${id}`, 
             this.header
         )
     }
 
-    public getPokemonSpecie(id): Observable<PokemonSpeciesResponse> {
+    public getPokemonSpecie(id: number): Observable<PokemonSpeciesResponse> {
         return this.httpClient.get<PokemonSpeciesResponse>(
-            `${PokemonApiConfig.url}${PokemonApiConfig.endpoints.pokemonSpecies}${id}`, 
+            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokemonSpecies}${id}`, 
             this.header
         )
     }

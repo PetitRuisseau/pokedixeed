@@ -1,8 +1,8 @@
-export const PokemonApiConfig = {
+export const PokeapiConfig = {
     url: 'https://pokeapi.co/api/v2/',
     endpoints: {
         pokemon: 'pokemon/',
         pokemonSpecies: 'pokemon-species/',
-        pokedex: 'pokedex/1'
+        pokedex: 'pokedex/2'
     }
 }

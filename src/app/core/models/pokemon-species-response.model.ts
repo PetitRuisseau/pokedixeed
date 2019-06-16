@@ -7,11 +7,11 @@ export class PokemonSpeciesResponse {
     egg_groups: NameUrl[];
     evolution_chain: {url: string};
     evolves_from_species: NameUrl;
-    flavor_text_entries: {flavor_text: string, language: NameUrl, version: NameUrl}[];
+    flavor_text_entries: FlavorTextEntries[];
     form_descriptions: any[];
     forms_switchable: boolean;
     gender_rate: number;
-    genera: {genus: string, language: NameUrl}[];
+    genera: Genera[];
     generation: NameUrl;
     growth_rate: NameUrl;
     habitat: NameUrl;
@@ -20,10 +20,42 @@ export class PokemonSpeciesResponse {
     id: number;
     is_baby: boolean;
     name: string;
-    names: {language: NameUrl, name: string}[];
+    names: Names[];
     order: number;
-    pal_park_encounters: {area: NameUrl, base_score: number, rate: number}[];
-    pokedex_numbers: {entry_number: number, pokedex: NameUrl}[];
+    pal_park_encounters: PalParkEncounters[];
+    pokedex_numbers: PokedexNumbers[];
     shape: NameUrl;
-    varieties: {is_default: boolean, pokemon: NameUrl}[];
+    varieties: Varieties[];
+}
+
+class FlavorTextEntries {
+    flavor_text: string;
+    language: NameUrl;
+    version: NameUrl;
+}
+
+class Genera {
+    genus: string;
+    language: NameUrl;
+}
+
+class Names {
+    name: string;
+    language: NameUrl;
+}
+
+class PalParkEncounters {
+    area: NameUrl;
+    base_score: number;
+    rate: number;
+}
+
+class PokedexNumbers {
+    entry_number: number;
+    pokedex: NameUrl;
+}
+
+class Varieties {
+    is_default: boolean;
+    pokemon: NameUrl;
 }
