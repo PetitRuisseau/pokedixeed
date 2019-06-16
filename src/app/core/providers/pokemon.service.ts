@@ -4,13 +4,21 @@ import { Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonSpeciesResponse, PokemonResponse, PokedexResponse } from '../models';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class PokemonService {
     public pokedexesponse: PokedexResponse;
     constructor(
         private pokeapiService: PokeapiService,
+        private httpClient: HttpClient,
     ) {}
+
+    public getMockPokemon() {
+        return this.httpClient.get<Pokemon[]>('assets/pokemon.mock.json',{
+            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+        })
+    }
 
     public getAllPokemon(): Observable<PokedexResponse> {
         return this.pokeapiService.getPokedexList().pipe(map(
