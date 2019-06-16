@@ -28,9 +28,11 @@
           abilities: filter.ability,
           color: filter.color,
           generation: filter.generation}
-        | orderBy : key : reverse">
+        | orderBy : key : reverse
+        | paginate: { itemsPerPage: 20, currentPage: p }">
       <img [src]="pokemon.sprites.front_default" />
       {{ pokemon.name }}
     </li>
   </ul>
+  <pagination-controls (pageChange)="p = $event" autoHide="true" maxSize="10"></pagination-controls>
 </main>

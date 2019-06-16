@@ -30,6 +30,8 @@ export class PokemonListComponent {
   
   public key: string = 'id';
   public reverse: boolean = true;
+  public p: number = 1;
+  
   constructor(
     private pokemonService: PokemonService,
   ) {

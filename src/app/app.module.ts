@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { PokemonService } from './core/providers/pokemon.service';
 import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
 import { FiltersPipe, OrderByPipe } from './shared/pipes';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { FiltersPipe, OrderByPipe } from './shared/pipes';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     PokeapiService,
