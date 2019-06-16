@@ -16,6 +16,8 @@
     <option value=""></option>
     <option *ngFor="let color of selectList.colors" [value]="color">{{ color }}</option>
   </select>
+  <button (click)="sort('id')">id</button>
+  <button (click)="sort('name')">nom</button>
   <ul>
     <li 
       *ngFor="
@@ -25,8 +27,8 @@
           types: filter.type,
           abilities: filter.ability,
           color: filter.color,
-          generation: filter.generation
-        }">
+          generation: filter.generation}
+        | orderBy : key : reverse">
       <img [src]="pokemon.sprites.front_default" />
       {{ pokemon.name }}
     </li>

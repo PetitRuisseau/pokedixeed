@@ -27,6 +27,9 @@ export class PokemonListComponent {
     totalCount: 0,
     count: 0
   }
+  
+  public key: string = 'id';
+  public reverse: boolean = true;
   constructor(
     private pokemonService: PokemonService,
   ) {
@@ -47,7 +50,7 @@ export class PokemonListComponent {
     this.loadAllPokemon()
   }
 
-  loadAllPokemon() {
+  private loadAllPokemon() {
     if (true) {
       this.pokemonService.getMockPokemon().subscribe(
         response => {
@@ -83,7 +86,7 @@ export class PokemonListComponent {
     )
   }
 
-  generateSelectList(pokemon: Pokemon) {
+  private generateSelectList(pokemon: Pokemon) {
     pokemon.types.forEach(type => {
       if (this.selectList.types.indexOf(type) < 0)
         this.selectList.types.push(type)
@@ -96,5 +99,10 @@ export class PokemonListComponent {
       this.selectList.generations.push(pokemon.generation)
     if (this.selectList.colors.indexOf(pokemon.color) < 0)
       this.selectList.colors.push(pokemon.color)
+  }
+  
+  public sort(key: string): void {
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 }
