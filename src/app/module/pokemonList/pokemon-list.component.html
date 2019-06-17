@@ -1,25 +1,50 @@
 <main *ngIf="!loading.isLoading">
-    <mat-form-field>
-        <mat-label>Favorite food</mat-label>
-        <mat-select [(ngModel)]="filter.type">
-          <mat-option *ngFor="let type of selectList.types" [value]="type">
-            {{ type }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+
+  <mat-form-field>
+    <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name or id">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <mat-select [(ngModel)]="filter.type">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let type of selectList.types.sort()" [value]="type">
+        {{ type }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Ability</mat-label>
+    <mat-select [(ngModel)]="filter.ability">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let ability of selectList.abilities.sort()" [value]="ability">
+        {{ ability }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>color</mat-label>
+    <mat-select [(ngModel)]="filter.color">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let color of selectList.colors.sort()" [value]="color">
+        {{ color }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>generation</mat-label>
+    <mat-select [(ngModel)]="filter.generation">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let generation of selectList.generations.sort()" [value]="generation">
+        {{ generation }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
-  <select [(ngModel)]="filter.ability">
-    <option value=""></option>
-    <option *ngFor="let ability of selectList.abilities" [value]="ability">{{ ability }}</option>
-  </select>
-  <select [(ngModel)]="filter.generation">
-    <option value=""></option>
-    <option *ngFor="let generation of selectList.generations" [value]="generation">{{ generation }}</option>
-  </select>
-  <select [(ngModel)]="filter.color">
-    <option value=""></option>
-    <option *ngFor="let color of selectList.colors" [value]="color">{{ color }}</option>
-  </select>
   <button (click)="sort('id')">id</button>
   <button (click)="sort('name')">nom</button>
   <ul>

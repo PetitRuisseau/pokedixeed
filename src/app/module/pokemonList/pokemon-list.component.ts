@@ -1,5 +1,5 @@
 import { Pokemon } from 'src/app/core/models/pokemon.model';
-import { PokemonService } from 'src/app/core/providers/pokemon.service';
+import { PokemonService } from 'src/app/core/services/pokemon.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -53,7 +53,7 @@ export class PokemonListComponent {
   }
 
   private loadAllPokemon() {
-    if (true) {
+    if (false) {
       this.pokemonService.getMockPokemon().subscribe(
         response => {
           this.pokemonList = response
@@ -80,6 +80,7 @@ export class PokemonListComponent {
               this.loading.count += 1
               if (this.loading.count == this.loading.totalCount) {
                 this.loading.isLoading = false
+                console.log(this.selectList)
               }
             }
           )
