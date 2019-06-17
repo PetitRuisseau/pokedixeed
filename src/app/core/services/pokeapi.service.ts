@@ -19,12 +19,20 @@ export class PokeapiService {
     constructor(
         private httpClient: HttpClient,
     ) {}
+    
+    private getPokeapi<T>(endpoint: string, params?: string[]): Observable<T> {
+
+        let paramUrl = ''
+        if (params) {
+            for (let param in params) {
+                paramUrl = paramUrl + param + '/'
+            }
+        }
+        return this.httpClient.get<T>(PokeapiConfig.url + endpoint + paramUrl, this.header);
+    }
 
     public getPokedexList(): Observable<PokedexResponse> {
-        return this.httpClient.get<PokedexResponse>(
-            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokedex}`, 
-            this.header
-        )
+        return this.getPokeapi<PokedexResponse>(PokeapiConfig.endpoints.pokedex)
     }
 
     public getPokemonDetails(id: number): Observable<PokemonResponse> {

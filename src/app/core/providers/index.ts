@@ -1,1 +1,0 @@
-export { PokeapiService } from './pokeapi.service';
