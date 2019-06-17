@@ -10,6 +10,8 @@ import { PokemonService } from './core/providers/pokemon.service';
 import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
 import { FiltersPipe, OrderByPipe } from './shared/pipes';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     NgxPaginationModule,
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   providers: [
     PokeapiService,

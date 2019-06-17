@@ -1,9 +1,13 @@
 <main *ngIf="!loading.isLoading">
+    <mat-form-field>
+        <mat-label>Favorite food</mat-label>
+        <mat-select [(ngModel)]="filter.type">
+          <mat-option *ngFor="let type of selectList.types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
   <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
-  <select [(ngModel)]="filter.type">
-    <option value=""></option>
-    <option *ngFor="let type of selectList.types" [value]="type">{{ type }}</option>
-  </select>
   <select [(ngModel)]="filter.ability">
     <option value=""></option>
     <option *ngFor="let ability of selectList.abilities" [value]="ability">{{ ability }}</option>
