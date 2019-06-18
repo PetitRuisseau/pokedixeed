@@ -1,6 +1,7 @@
 import { PokemonService } from 'src/app/core/services/pokemon.service';
 import { Component } from '@angular/core';
-import { PokemonEntries } from 'src/app/core/models';
+import { PokemonEntries, NameUrl } from 'src/app/core/models';
+import { AbilitiesService } from 'src/app/core/services';
 
 @Component({
   selector: 'pokemon-list',
@@ -14,14 +15,15 @@ export class PokemonListComponent {
     pokemonName: string,
     type: string,
     ability: string,
+    abilityPokemonList: []
     color: string,
     generation: string,
   }
   public selectList: {
-    types: string[],
-    abilities: string[],
-    colors: string[],
-    generations: string[],
+    types: NameUrl[],
+    abilities: NameUrl[],
+    colors: NameUrl[],
+    generations: NameUrl[],
   }
   
   public key: string = 'entry_number';
@@ -30,6 +32,7 @@ export class PokemonListComponent {
   
   constructor(
     private pokemonService: PokemonService,
+    private abilitiesService: AbilitiesService,
   ) {
     this.selectList = {
       types: [],
@@ -41,10 +44,12 @@ export class PokemonListComponent {
       pokemonName: '',
       type: '',
       ability: '',
+      abilityPokemonList: [],
       color: '',
       generation: '',
     }
     this.loadPokemonList()
+    this.loadSelectList()
   }
 
   private loadPokemonList() {
@@ -52,6 +57,22 @@ export class PokemonListComponent {
       response => {
         this.pokemonList = response
         this.isLoading = false;
+      }
+    )
+  }
+
+  private loadSelectList() {
+    this.abilitiesService.getAllAbilities().subscribe(
+      response => {
+        this.selectList.abilities = response.results
+      }
+    )
+  }
+
+  abilityChange() {
+     this.abilitiesService.getPokemonListFromOneAbility(this.filter.ability).subscribe(
+      response => {
+        this.filter.abilityPokemonList = response
       }
     )
   }

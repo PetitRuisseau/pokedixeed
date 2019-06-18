@@ -16,10 +16,10 @@
 
   <mat-form-field>
     <mat-label>Ability</mat-label>
-    <mat-select [(ngModel)]="filter.ability">
+    <mat-select (selectionChange)="abilityChange()" [(ngModel)]="filter.ability">
       <mat-option value=""></mat-option>
-      <mat-option *ngFor="let ability of selectList.abilities.sort()" [value]="ability">
-        {{ ability }}
+      <mat-option *ngFor="let ability of selectList.abilities" [value]="ability.name">
+        {{ ability.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -53,6 +53,8 @@
         | filters: {
           pokemon_species: filter.pokemonName,
           entry_number: filter.pokemonName}
+        | filterArray: {
+          pokemon_species: filter.abilityPokemonList}
         | orderBy : key : reverse
         | paginate: { itemsPerPage: 20, currentPage: p }">
       {{ pokemon.entry_number }} {{ pokemon.pokemon_species.name }}
