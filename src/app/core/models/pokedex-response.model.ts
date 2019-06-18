@@ -1,4 +1,5 @@
 import { NameUrl } from './name-url.module';
+import { PokemonEntries } from './pokedex-entries.model';
 
 export class PokedexResponse {
     descriptions: Descriptions[];
@@ -19,9 +20,4 @@ class Descriptions {
 class Names {
     name: string;
     language: NameUrl;
-}
-
-class PokemonEntries {
-    entry_number: number;
-    pokemon_species: NameUrl;
 }

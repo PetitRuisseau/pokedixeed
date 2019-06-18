@@ -1,7 +1,7 @@
-<main *ngIf="!loading.isLoading">
+<main *ngIf="!isLoading">
 
   <mat-form-field>
-    <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name or id">
+    <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name">
   </mat-form-field>
 
   <mat-form-field>
@@ -44,23 +44,18 @@
     </mat-select>
   </mat-form-field>
 
-  <input [(ngModel)]="filter.pokemonName" placeholder="Search..">
-  <button (click)="sort('id')">id</button>
-  <button (click)="sort('name')">nom</button>
+  <button (click)="sort('entry_number')">id</button>
+  <button (click)="sort('pokemon_species')">nom</button>
   <ul>
     <li 
       *ngFor="
         let pokemon of pokemonList
         | filters: {
-          name: filter.pokemonName,
-          types: filter.type,
-          abilities: filter.ability,
-          color: filter.color,
-          generation: filter.generation}
+          pokemon_species: filter.pokemonName,
+          entry_number: filter.pokemonName}
         | orderBy : key : reverse
         | paginate: { itemsPerPage: 20, currentPage: p }">
-      <img [src]="pokemon.sprites.front_default" />
-      {{ pokemon.name }}
+      {{ pokemon.entry_number }} {{ pokemon.pokemon_species.name }}
     </li>
   </ul>
   <pagination-controls (pageChange)="p = $event" autoHide="true" maxSize="10"></pagination-controls>

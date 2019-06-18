@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 
 import { PokeapiConfig } from '../config/pokeapi.config';
 import {
-    PokedexResponse,
     PokemonResponse,
     PokemonSpeciesResponse,
+    AnyListResponse,
+    PokedexResponse,
 } from '../models';
 
 @Injectable()
@@ -20,32 +21,57 @@ export class PokeapiService {
         private httpClient: HttpClient,
     ) {}
     
-    private getPokeapi<T>(endpoint: string, params?: string[]): Observable<T> {
-
-        let paramUrl = ''
-        if (params) {
-            for (let param in params) {
-                paramUrl = paramUrl + param + '/'
-            }
-        }
-        return this.httpClient.get<T>(PokeapiConfig.url + endpoint + paramUrl, this.header);
+    private getPokeapi<T>(endpoint: string, name?: string): Observable<T> {
+        if (name)
+            return this.httpClient.get<T>(`${PokeapiConfig.url}${endpoint}${name}`, this.header);
+        return this.httpClient.get<T>(`${PokeapiConfig.url}${endpoint}?offset=0&limit=1000`, this.header);
     }
 
-    public getPokedexList(): Observable<PokedexResponse> {
+    public getPokedex(): Observable<PokedexResponse> {
         return this.getPokeapi<PokedexResponse>(PokeapiConfig.endpoints.pokedex)
     }
 
-    public getPokemonDetails(id: number): Observable<PokemonResponse> {
-        return this.httpClient.get<PokemonResponse>(
-            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokemon}${id}`, 
-            this.header
-        )
+    public getAllPokemon(): Observable<AnyListResponse> {
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
     }
 
-    public getPokemonSpecie(id: number): Observable<PokemonSpeciesResponse> {
-        return this.httpClient.get<PokemonSpeciesResponse>(
-            `${PokeapiConfig.url}${PokeapiConfig.endpoints.pokemonSpecies}${id}`, 
-            this.header
-        )
+    public getOnePokemon(name: string): Observable<PokemonResponse> {
+        return this.getPokeapi<PokemonResponse>(PokeapiConfig.endpoints.pokemon, name)
+    }
+
+    public getOnePokemonSpecie(name: string): Observable<PokemonSpeciesResponse> {
+        return this.getPokeapi<PokemonSpeciesResponse>(PokeapiConfig.endpoints.pokemonSpecies, name)
+    }
+
+    public getAllAbilities(): Observable<AnyListResponse> {
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+    }
+
+    public getOneAbility(name: string): Observable<any> {
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+    }
+
+    public getAllTypes(): Observable<AnyListResponse> {
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+    }
+
+    public getOneType(name: string): Observable<any> {
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+    }
+
+    public getAllGenerations(): Observable<AnyListResponse> {
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+    }
+
+    public getOneGeneration(name: string): Observable<any> {
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+    }
+
+    public getAllColors(): Observable<AnyListResponse> {
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+    }
+
+    public getOnecolor(name: string): Observable<any> {
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
     }
 }

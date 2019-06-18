@@ -22,7 +22,10 @@ export class FiltersPipe implements PipeTransform {
                 (x && new RegExp(filter[keyName], 'gi').test(item[keyName])) || filter[keyName] == "", true));
       } else {
         return items.filter(item => {
-          return filterKeys.every((keyName) => {
+          return filterKeys.some((keyName) => {
+            if (item[keyName].name) {
+              return new RegExp(filter[keyName], 'gi').test(item[keyName].name) || filter[keyName] == "";
+            }
             return new RegExp(filter[keyName], 'gi').test(item[keyName]) || filter[keyName] == "";
           });
         });
