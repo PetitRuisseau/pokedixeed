@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokeapiService, PokemonService } from './core/services';
+import { PokeapiService, PokemonService, AbilitiesService } from './core/services';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
-import { FiltersPipe, OrderByPipe } from './shared/pipes';
+import { FiltersPipe, OrderByPipe, FilterArrayPipe } from './shared/pipes';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
   declarations: [
     AppComponent,
     FiltersPipe,
+    FilterArrayPipe,
     OrderByPipe,
     PokemonListComponent,
   ],
@@ -32,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
   ],
   providers: [
     PokeapiService,
-    PokemonService
+    PokemonService,
+    AbilitiesService,
   ],
   bootstrap: [AppComponent]
 })
