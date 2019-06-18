@@ -10,11 +10,17 @@ export class OrderByPipe implements PipeTransform {
       return array;
     }
     if (asc){
-      return Array.from(array).sort((item1: any, item2: any) => { 
+      return Array.from(array).sort((item1: any, item2: any) => {
+        if (item1[orderBy].name && item2[orderBy].name) {
+          return this.orderByComparator(item1[orderBy].name, item2[orderBy].name);
+        }
         return this.orderByComparator(item1[orderBy], item2[orderBy]);
       });
     } else{
       return Array.from(array).sort((item1: any, item2: any) => { 
+        if (item1[orderBy].name && item2[orderBy].name) {
+          return this.orderByComparator(item2[orderBy].name, item1[orderBy].name);
+        }
         return this.orderByComparator(item2[orderBy], item1[orderBy]);
       });
     }

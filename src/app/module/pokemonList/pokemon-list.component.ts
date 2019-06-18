@@ -69,7 +69,7 @@ export class PokemonListComponent {
     )
   }
 
-  abilityChange() {
+  public abilityChange() {
      this.abilitiesService.getPokemonListFromOneAbility(this.filter.ability).subscribe(
       response => {
         this.filter.abilityPokemonList = response
