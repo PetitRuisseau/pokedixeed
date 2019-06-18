@@ -8,6 +8,7 @@ import {
     PokemonSpeciesResponse,
     AnyListResponse,
     PokedexResponse,
+    AbilityResponse,
 } from '../models';
 
 @Injectable()
@@ -44,34 +45,34 @@ export class PokeapiService {
     }
 
     public getAllAbilities(): Observable<AnyListResponse> {
-        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.ability)
     }
 
-    public getOneAbility(name: string): Observable<any> {
-        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+    public getOneAbility(name: string): Observable<AbilityResponse> {
+        return this.getPokeapi<AbilityResponse>(PokeapiConfig.endpoints.ability, name)
     }
 
     public getAllTypes(): Observable<AnyListResponse> {
-        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.type)
     }
 
     public getOneType(name: string): Observable<any> {
-        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.type, name)
     }
 
     public getAllGenerations(): Observable<AnyListResponse> {
-        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.generation)
     }
 
     public getOneGeneration(name: string): Observable<any> {
-        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.generation, name)
     }
 
     public getAllColors(): Observable<AnyListResponse> {
-        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.pokemon)
+        return this.getPokeapi<AnyListResponse>(PokeapiConfig.endpoints.color)
     }
 
     public getOnecolor(name: string): Observable<any> {
-        return this.getPokeapi<any>(PokeapiConfig.endpoints.pokemonSpecies, name)
+        return this.getPokeapi<any>(PokeapiConfig.endpoints.color, name)
     }
 }

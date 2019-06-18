@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { PokeapiService } from './pokeapi.service';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Pokemon } from '../models/pokemon.model';
 import { PokemonSpeciesResponse, PokemonResponse, PokemonEntries } from '../models';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class PokemonService {
@@ -12,13 +10,14 @@ export class PokemonService {
     private pokemonDetailsList = []
     constructor(
         private pokeapiService: PokeapiService,
-        private httpClient: HttpClient,
     ) {}
 
-    public getMockPokemon() {
-        return this.httpClient.get<Pokemon[]>('assets/pokemon.mock.json',{
-            headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-        })
+    private parsePokemon(name: string, pokemonDetailsResponse: PokemonResponse, pokemonSpeciesResponse: PokemonSpeciesResponse) {
+        return {
+            name: name,
+            pokemon: pokemonDetailsResponse,
+            species: pokemonSpeciesResponse,
+        }
     }
 
     public getAllPokemon(): Observable<PokemonEntries[]> {
@@ -44,13 +43,5 @@ export class PokemonService {
             this.pokemonDetailsList[name] = this.parsePokemon(name, pokemonDetailsResponse, pokemonSpeciesResponse);
             return this.parsePokemon(name, pokemonDetailsResponse, pokemonSpeciesResponse);
         }));
-    }
-
-    private parsePokemon(name: string, pokemonDetailsResponse: PokemonResponse, pokemonSpeciesResponse: PokemonSpeciesResponse) {
-        return {
-            name: name,
-            pokemon: pokemonDetailsResponse,
-            species: pokemonSpeciesResponse,
-        }
     }
 }
