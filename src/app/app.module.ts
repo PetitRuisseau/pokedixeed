@@ -24,6 +24,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { MatInputModule } from '@angular/material/input';
     BrowserAnimationsModule,
     MatSelectModule,
     MatInputModule,
+    MatSidenavModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [
     PokeapiService,

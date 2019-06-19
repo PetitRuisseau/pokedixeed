@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { PokemonEntries, NameUrl } from 'src/app/core/models';
+import { MediaMatcher } from '@angular/cdk/layout';
 import {
   AbilitiesService,
   GenerationsService,
@@ -15,7 +16,11 @@ import { forkJoin, of } from 'rxjs';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent {
+  public mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+
   public isLoading: boolean = true;
+  public sideNavOpened: boolean = true;
   public pokemonList: PokemonEntries[];
   public filter: {
     pokemonName: string,
@@ -47,6 +52,8 @@ export class PokemonListComponent {
     private generationsService: GenerationsService,
     private typesService: TypesService,
     private colorsService: ColorsService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
   ) {
     this.selectList = {
       types: [],
@@ -69,6 +76,13 @@ export class PokemonListComponent {
     }
     this.loadPokemonList()
     this.loadSelectList()
+    this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener)
+  }
+  
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
   private loadPokemonList() {
