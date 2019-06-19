@@ -7,7 +7,7 @@ import { PokemonSpeciesResponse, PokemonResponse, PokemonEntries } from '../mode
 @Injectable()
 export class PokemonService {
     private allPokemonList: PokemonEntries[];
-    private pokemonDetailsList = []
+    private pokemonDetailsList = {}
     constructor(
         private pokeapiService: PokeapiService,
     ) {}

@@ -3,7 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokeapiService, PokemonService, AbilitiesService } from './core/services';
+import {
+  PokeapiService,
+  PokemonService,
+  AbilitiesService,
+  GenerationsService,
+  TypesService,
+  ColorsService
+} from './core/services';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
@@ -35,6 +42,9 @@ import { MatInputModule } from '@angular/material/input';
     PokeapiService,
     PokemonService,
     AbilitiesService,
+    GenerationsService,
+    TypesService,
+    ColorsService,
   ],
   bootstrap: [AppComponent]
 })

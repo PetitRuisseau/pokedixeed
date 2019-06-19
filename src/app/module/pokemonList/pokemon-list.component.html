@@ -6,19 +6,19 @@
 
   <mat-form-field>
     <mat-label>Type</mat-label>
-    <mat-select [(ngModel)]="filter.type">
+    <mat-select (selectionChange)="abilityChange('type')" [(ngModel)]="filter.type">
       <mat-option value=""></mat-option>
-      <mat-option *ngFor="let type of selectList.types.sort()" [value]="type">
-        {{ type }}
+      <mat-option *ngFor="let type of selectList.types | orderBy : 'name' : true" [value]="type.name">
+        {{ type.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Ability</mat-label>
-    <mat-select (selectionChange)="abilityChange()" [(ngModel)]="filter.ability">
+    <mat-select (selectionChange)="abilityChange('ability')" [(ngModel)]="filter.ability">
       <mat-option value=""></mat-option>
-      <mat-option *ngFor="let ability of selectList.abilities" [value]="ability.name">
+      <mat-option *ngFor="let ability of selectList.abilities | orderBy : 'name' : true" [value]="ability.name">
         {{ ability.name }}
       </mat-option>
     </mat-select>
@@ -26,20 +26,20 @@
 
   <mat-form-field>
     <mat-label>color</mat-label>
-    <mat-select [(ngModel)]="filter.color">
+    <mat-select (selectionChange)="abilityChange('color')" [(ngModel)]="filter.color">
       <mat-option value=""></mat-option>
-      <mat-option *ngFor="let color of selectList.colors.sort()" [value]="color">
-        {{ color }}
+      <mat-option *ngFor="let color of selectList.colors | orderBy : 'name' : true" [value]="color.name">
+        {{ color.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>generation</mat-label>
-    <mat-select [(ngModel)]="filter.generation">
+    <mat-select (selectionChange)="abilityChange('generation')" [(ngModel)]="filter.generation">
       <mat-option value=""></mat-option>
-      <mat-option *ngFor="let generation of selectList.generations.sort()" [value]="generation">
-        {{ generation }}
+      <mat-option *ngFor="let generation of selectList.generations | orderBy : 'name' : true" [value]="generation.name">
+        {{ generation.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -54,7 +54,13 @@
           pokemon_species: filter.pokemonName,
           entry_number: filter.pokemonName}
         | filterArray: {
-          pokemon_species: filter.abilityPokemonList}
+          pokemon_species: filteredPokemonListForFilter.ability}
+        | filterArray: {
+          pokemon_species: filteredPokemonListForFilter.type}
+        | filterArray: {
+          pokemon_species: filteredPokemonListForFilter.generation}
+        | filterArray: {
+          pokemon_species: filteredPokemonListForFilter.color}
         | orderBy : key : reverse
         | paginate: { itemsPerPage: 20, currentPage: p }">
       {{ pokemon.entry_number }} {{ pokemon.pokemon_species.name }}
