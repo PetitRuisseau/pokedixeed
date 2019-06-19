@@ -20,7 +20,7 @@
       </mat-button-toggle-group>
 
       <mat-form-field>
-        <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name">
+        <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name or id">
       </mat-form-field>
 
       <mat-form-field>
@@ -44,7 +44,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>color</mat-label>
+        <mat-label>Color</mat-label>
         <mat-select (selectionChange)="abilityChange('color')" [(ngModel)]="filter.color">
           <mat-option value=""></mat-option>
           <mat-option *ngFor="let color of selectList.colors | orderBy : 'name' : true" [value]="color.name">
@@ -54,7 +54,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>generation</mat-label>
+        <mat-label>Generation</mat-label>
         <mat-select (selectionChange)="abilityChange('generation')" [(ngModel)]="filter.generation">
           <mat-option value=""></mat-option>
           <mat-option *ngFor="let generation of selectList.generations | orderBy : 'name' : true" [value]="generation.name">
@@ -72,6 +72,7 @@
     </button>
     
     <section id="pokemon-list">
+      <loading-component *ngIf="isLoading" style="height: 100vh"></loading-component>
       <ul *ngIf="!isLoading">
         <li *ngFor="
           let pokemon of pokemonList
@@ -96,7 +97,7 @@
         </li>
       </ul>
 
-      <pagination-controls (pageChange)="p = $event" autoHide="true"></pagination-controls>
+      <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
 
     </section>
   </mat-sidenav-content>

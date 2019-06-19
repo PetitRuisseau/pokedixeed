@@ -40,7 +40,7 @@ export class PokemonListComponent {
   }
   
   public isLoading: boolean = true;
-  public sideNavOpened: boolean = true;
+  public sideNavOpened: boolean = false;
   public key: string = 'entry_number';
   public reverse: boolean = true;
   public p: number = 1;
@@ -154,6 +154,7 @@ export class PokemonListComponent {
   
   public openPokemonDetailsDialog(name: string) {
     this.dialog.open(PokemonDetailsDialog, {
+      maxWidth: '100vw',
       data: {
         pokemon: name
       }
