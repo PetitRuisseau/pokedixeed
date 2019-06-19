@@ -28,6 +28,10 @@ export class PokeapiService {
         return this.httpClient.get<T>(`${PokeapiConfig.url}${endpoint}?offset=0&limit=1000`, this.header);
     }
 
+    public getPokemonSpriteUrl(id: number): string {
+        return `${PokeapiConfig.spriteUrl.front_default}${id}${PokeapiConfig.spriteUrlEnd}`
+    }
+
     public getPokedex(): Observable<PokedexResponse> {
         return this.getPokeapi<PokedexResponse>(PokeapiConfig.endpoints.pokedex)
     }

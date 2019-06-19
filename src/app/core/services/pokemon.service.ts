@@ -44,4 +44,8 @@ export class PokemonService {
             return this.parsePokemon(name, pokemonDetailsResponse, pokemonSpeciesResponse);
         }));
     }
+
+    public getPokemonSpriteUrl(id: number): string {
+        return this.pokeapiService.getPokemonSpriteUrl(id)
+    }
 }

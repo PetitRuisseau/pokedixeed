@@ -47,22 +47,22 @@
   <button (click)="sort('entry_number')">id</button>
   <button (click)="sort('pokemon_species')">nom</button>
   <ul>
-    <li 
-      *ngFor="
-        let pokemon of pokemonList
-        | filters: {
-          pokemon_species: filter.pokemonName,
-          entry_number: filter.pokemonName}
-        | filterArray: {
-          pokemon_species: filteredPokemonListForFilter.ability}
-        | filterArray: {
-          pokemon_species: filteredPokemonListForFilter.type}
-        | filterArray: {
-          pokemon_species: filteredPokemonListForFilter.generation}
-        | filterArray: {
-          pokemon_species: filteredPokemonListForFilter.color}
-        | orderBy : key : reverse
-        | paginate: { itemsPerPage: 20, currentPage: p }">
+    <li *ngFor="
+      let pokemon of pokemonList
+      | filters: {
+        pokemon_species: filter.pokemonName,
+        entry_number: filter.pokemonName}
+      | filterArray: {
+        pokemon_species: filteredPokemonListForFilter.ability}
+      | filterArray: {
+        pokemon_species: filteredPokemonListForFilter.type}
+      | filterArray: {
+        pokemon_species: filteredPokemonListForFilter.generation}
+      | filterArray: {
+        pokemon_species: filteredPokemonListForFilter.color}
+      | orderBy : key : reverse
+      | paginate: { itemsPerPage: 20, currentPage: p }">
+      <img [src]="getPokemonSpriteUrl(pokemon.entry_number)" [alt]="pokemon.pokemon_species.name">
       {{ pokemon.entry_number }} {{ pokemon.pokemon_species.name }}
     </li>
   </ul>

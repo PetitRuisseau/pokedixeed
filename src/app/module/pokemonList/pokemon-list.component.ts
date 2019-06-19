@@ -131,4 +131,8 @@ export class PokemonListComponent {
     this.key = key;
     this.reverse = !this.reverse;
   }
+
+  public getPokemonSpriteUrl(id: number): string {
+    return this.pokemonService.getPokemonSpriteUrl(id)
+  }
 }
