@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import {
   PokeapiService,
   PokemonService,
@@ -11,9 +11,14 @@ import {
   TypesService,
   ColorsService
 } from './core/services';
+import {
+  PokemonListComponent,
+  FooterComponent,
+  HeaderComponent,
+} from './module';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { PokemonListComponent } from './module/pokemonList/pokemon-list.component';
 import { FiltersPipe, OrderByPipe, FilterArrayPipe } from './shared/pipes';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,6 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     FilterArrayPipe,
     OrderByPipe,
     PokemonListComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

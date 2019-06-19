@@ -1,4 +1,4 @@
-<main *ngIf="!isLoading">
+<section *ngIf="!isLoading">
 
   <mat-form-field>
     <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name">
@@ -67,4 +67,4 @@
     </li>
   </ul>
   <pagination-controls (pageChange)="p = $event" autoHide="true" maxSize="10"></pagination-controls>
-</main>
+</section>
