@@ -30,6 +30,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { LoadingComponent } from './shared/component/loading/loading.component';
 
 @NgModule({
   entryComponents: [PokemonDetailsDialog],
@@ -42,6 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     PokemonDetailsDialog,
     FooterComponent,
     HeaderComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
