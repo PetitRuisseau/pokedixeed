@@ -1,0 +1,51 @@
+<div *ngIf="pokemonDetails" class="pokedex">
+  <button mat-mini-fab (click)="close()">
+    <mat-icon aria-hidden="false" aria-label="close">close</mat-icon>
+  </button>
+  <h1>{{pokemonDetails.name}}</h1>
+  <div class="stat-img-table">
+    <section class="img-table">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Male</th>
+            <th>Female</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Normal</td>
+            <td class="img-case"><img [src]="pokemonDetails.pokemon.sprites.front_default" alt="male normal"></td>
+            <td class="img-case"><img [src]="pokemonDetails.pokemon.sprites.front_female" *ngIf="pokemonDetails.pokemon.sprites.front_female" alt="female normal"></td>
+          </tr>
+          <tr>
+            <td>Shiny</td>
+            <td class="img-case"><img [src]="pokemonDetails.pokemon.sprites.front_shiny" *ngIf="pokemonDetails.pokemon.sprites.front_shiny" alt="male shiny"></td>
+            <td class="img-case"><img [src]="pokemonDetails.pokemon.sprites.front_shiny_female" *ngIf="pokemonDetails.pokemon.sprites.front_shiny_female" alt="female shiny"></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="stat-table">
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Stats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stat of pokemonDetails.pokemon.stats">
+            <td>{{ stat.stat.name }}</td>
+            <td>{{ stat.base_stat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <section class="description">
+    <h2>description</h2>
+    <p>{{ getDescription(pokemonDetails.species.flavor_text_entries) }}</p>
+  </section>
+</div>
+<loading-component *ngIf="!pokemonDetails"></loading-component>

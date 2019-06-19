@@ -1,0 +1,104 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [fixedInViewport]="mobileQuery.matches" [mode]="mobileQuery.matches ? 'over' : 'side'" [(opened)]="sideNavOpened">
+    <section id="filters-menu">
+      
+      <button mat-mini-fab class="open-close-side-nav" (click)="sideNavOpened=!sideNavOpened" [ngClass]="{'close': sideNavOpened}">
+        <mat-icon aria-hidden="false" aria-label="close">close</mat-icon>
+      </button>
+
+      <mat-button-toggle-group name="order-by" aria-label="Order by">
+        <mat-button-toggle (click)="sort('entry_number')" value="id">
+          Pokemon ID
+          <mat-icon *ngIf="key=='entry_number'&&!reverse" aria-hidden="false" aria-label="croissant">expand_less</mat-icon>
+          <mat-icon *ngIf="key=='entry_number'&&reverse" aria-hidden="false" aria-label="decroissant">expand_more</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle (click)="sort('pokemon_species')" value="name">
+          <mat-icon *ngIf="key=='pokemon_species'&&!reverse" aria-hidden="false" aria-label="croissant">expand_less</mat-icon>
+          <mat-icon *ngIf="key=='pokemon_species'&&reverse" aria-hidden="false" aria-label="decroissant">expand_more</mat-icon>
+          Pokemon name
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-form-field>
+        <input [(ngModel)]="filter.pokemonName" matInput placeholder="Pokemon name or id">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select (selectionChange)="abilityChange('type')" [(ngModel)]="filter.type">
+          <mat-option value=""></mat-option>
+          <mat-option *ngFor="let type of selectList.types | orderBy : 'name' : true" [value]="type.name">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Ability</mat-label>
+        <mat-select (selectionChange)="abilityChange('ability')" [(ngModel)]="filter.ability">
+          <mat-option value=""></mat-option>
+          <mat-option *ngFor="let ability of selectList.abilities | orderBy : 'name' : true" [value]="ability.name">
+            {{ ability.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Color</mat-label>
+        <mat-select (selectionChange)="abilityChange('color')" [(ngModel)]="filter.color">
+          <mat-option value=""></mat-option>
+          <mat-option *ngFor="let color of selectList.colors | orderBy : 'name' : true" [value]="color.name">
+            {{ color.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Generation</mat-label>
+        <mat-select (selectionChange)="abilityChange('generation')" [(ngModel)]="filter.generation">
+          <mat-option value=""></mat-option>
+          <mat-option *ngFor="let generation of selectList.generations | orderBy : 'name' : true" [value]="generation.name">
+            {{ generation.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </section>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <button mat-mini-fab class="open-close-side-nav" (click)="sideNavOpened=!sideNavOpened" [ngClass]="{'close': sideNavOpened}">
+      <mat-icon aria-hidden="false" aria-label="more">more_horiz</mat-icon>
+    </button>
+    
+    <section id="pokemon-list">
+      <loading-component *ngIf="isLoading" style="height: 100vh"></loading-component>
+      <ul *ngIf="!isLoading">
+        <li *ngFor="
+          let pokemon of pokemonList
+          | filters: {
+            pokemon_species: filter.pokemonName,
+            entry_number: filter.pokemonName}
+          | filterArray: {
+            pokemon_species: filteredPokemonListForFilter.ability}
+          | filterArray: {
+            pokemon_species: filteredPokemonListForFilter.type}
+          | filterArray: {
+            pokemon_species: filteredPokemonListForFilter.generation}
+          | filterArray: {
+            pokemon_species: filteredPokemonListForFilter.color}
+          | orderBy : key : reverse
+          | paginate: { itemsPerPage: mobileQuery.matches ? 10 : 50, currentPage: p }">
+          <button mat-raised-button (click)="openPokemonDetailsDialog(pokemon.pokemon_species.name)">
+            <span class="pokemon-id">{{ pokemon.entry_number }}</span>
+            <img [src]="getPokemonSpriteUrl(pokemon.entry_number)" [alt]="pokemon.pokemon_species.name" aria-hidden="true">
+            <p>{{ pokemon.pokemon_species.name }}</p>
+          </button>
+        </li>
+      </ul>
+
+      <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
+
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>

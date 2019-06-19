@@ -2,16 +2,15 @@
 
 ## Description
 
-Le but de ce test technique est de créer une application de gestion des pokémons. Je vais utiliser l'API publique : [https://pokeapi.co/](https://pokeapi.co/).
+Le but de ce test technique est de créer une application de gestion des pokémons. Pour cela il faudra utiliser l'API publique : [https://pokeapi.co/](https://pokeapi.co/).
 
 L'application sera composé de plusieurs éléments :
 
-- Une page d'accueil qui listera les pokémons des 3 premieres générations. L'utilisateur devra pouvoir filtrer les pokémons sur différentes propriétés (type de pokemon, nom ou n° contient, génération, légendaire) ainsi que de les ordonner (alphapetique, n°). La liste devra être paginée également (pagination direct).
-- Une popup de détails des pokémons. L'utilisateur devra pouvoir cliquer sur un élément de la liste qui fera apparaitre une popup où les détails du pokémon seront affichés.
-- L'utilisateur devra pouvoir enregistrer des pokemon dans une liste de favoris
-- Une page de composition d'équipes / gestion des favoris. Une équipe est composée de 6 slots. L'utilisateur pourra choisir les pokémons qu'il veut ajouter dans son équipe. Il pourra enlever un pokemon de son équipe pour le remplacer par un autre. Les pokémons devront être affichés sous forme de grille avec les sprites et chaque élement de la grille sera cliquable pour sélectionner le pokemon.
+- Une page d'accueil qui listera les pokémons. L'utilisateur devra pouvoir filtrer les pokémons sur différentes propriétés (type de pokemon par exemple) ainsi que de les ordonner. La liste devra être paginée également (pagination direct ou lazy loading au choix).
+- Une page de détails des pokémons. L'utilisateur devra pouvoir cliquer sur un élément de la liste qui renverra vers une autre page où les détails du pokémon seront affichés.
+- Une page de composition d'équipes. Une équipe est composée de 6 slots. L'utilisateur pourra choisir les pokémons qu'il veut ajouter dans son équipe. Il pourra enlever un pokemon de son équipe pour le remplacer par un autre. Les pokémons devront être affichés sous forme de grille avec les sprites et chaque élement de la grille sera cliquable pour sélectionner le pokemon.
 
-J'utiliserais une librairie graphique ...
+Possibilité d'utiliser une librairie graphique (angular material, ...).
 
 ## Rendu
 
@@ -19,7 +18,7 @@ Un repository [Github](https://github.com/) devra être créé contenant le code
 
 Chaque fonctionnalité devra faire l'objet d'un commit unique et dont le nom respecte la norme [Conventional commit](https://www.conventionalcommits.org/en/v1.0.0-beta.4/). Pour cela, n'hésitez pas à utiliser la commande `git rebase` en local pour réécrire votre historique.
 
-L'application va également être déployée sur Github pages a l'adresse [petitruisseau.github.io](petitruisseau.github.io).
+L'application devra également être déployée sur Github pages.
 
 ## Points de notation
 
@@ -34,6 +33,7 @@ L'application va également être déployée sur Github pages a l'adresse [petit
 - Tests unitaires (composants, services, et effects si NgRx)
 - Animations
 - Drag&Drop pour la sélection des pokémons dans son équipe
+
 
 # Pokedixeed
 
