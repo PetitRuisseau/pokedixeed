@@ -3,6 +3,7 @@ import { PokeapiService } from './pokeapi.service';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PokemonSpeciesResponse, PokemonResponse, PokemonEntries } from '../models';
+import { PokemonDetails } from '../models/pokemon-details.model';
 
 @Injectable()
 export class PokemonService {
@@ -12,10 +13,10 @@ export class PokemonService {
         private pokeapiService: PokeapiService,
     ) {}
 
-    private parsePokemon(name: string, pokemonDetailsResponse: PokemonResponse, pokemonSpeciesResponse: PokemonSpeciesResponse) {
+    private parsePokemon(name: string, pokemonResponse: PokemonResponse, pokemonSpeciesResponse: PokemonSpeciesResponse): PokemonDetails {
         return {
             name: name,
-            pokemon: pokemonDetailsResponse,
+            pokemon: pokemonResponse,
             species: pokemonSpeciesResponse,
         }
     }
@@ -32,16 +33,16 @@ export class PokemonService {
         ))
     }
 
-    public getPokemonDetails(name: string): Observable<any> {
+    public getPokemonDetails(name: string): Observable<PokemonDetails> {
         if (this.pokemonDetailsList[name]) {
             return of(this.pokemonDetailsList[name])
         }
         return forkJoin(
             this.pokeapiService.getOnePokemon(name), 
             this.pokeapiService.getOnePokemonSpecie(name)
-        ).pipe(map(([pokemonDetailsResponse, pokemonSpeciesResponse]) => {
-            this.pokemonDetailsList[name] = this.parsePokemon(name, pokemonDetailsResponse, pokemonSpeciesResponse);
-            return this.parsePokemon(name, pokemonDetailsResponse, pokemonSpeciesResponse);
+        ).pipe(map(([pokemonResponse, pokemonSpeciesResponse]) => {
+            this.pokemonDetailsList[name] = this.parsePokemon(name, pokemonResponse, pokemonSpeciesResponse);
+            return this.parsePokemon(name, pokemonResponse, pokemonSpeciesResponse);
         }));
     }
 

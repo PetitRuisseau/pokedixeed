@@ -15,6 +15,7 @@ import {
   PokemonListComponent,
   FooterComponent,
   HeaderComponent,
+  PokemonDetailsDialog,
 } from './module';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -28,14 +29,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
+  entryComponents: [PokemonDetailsDialog],
   declarations: [
     AppComponent,
     FiltersPipe,
     FilterArrayPipe,
     OrderByPipe,
     PokemonListComponent,
+    PokemonDetailsDialog,
     FooterComponent,
     HeaderComponent,
   ],
@@ -52,6 +56,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonToggleModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
   ],
   providers: [
     PokeapiService,

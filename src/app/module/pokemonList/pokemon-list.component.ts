@@ -9,6 +9,8 @@ import {
   PokemonService
 } from 'src/app/core/services';
 import { forkJoin, of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { PokemonDetailsDialog } from './pokemon-details/pokemon-details.component';
 
 @Component({
   selector: 'pokemon-list',
@@ -16,11 +18,6 @@ import { forkJoin, of } from 'rxjs';
   styleUrls: ['./pokemon-list.component.scss']
 })
 export class PokemonListComponent {
-  public mobileQuery: MediaQueryList;
-  private _mobileQueryListener: () => void;
-
-  public isLoading: boolean = true;
-  public sideNavOpened: boolean = true;
   public pokemonList: PokemonEntries[];
   public filter: {
     pokemonName: string,
@@ -42,11 +39,16 @@ export class PokemonListComponent {
     generations: string[],
   }
   
+  public isLoading: boolean = true;
+  public sideNavOpened: boolean = true;
   public key: string = 'entry_number';
   public reverse: boolean = true;
   public p: number = 1;
+  public mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
   
   constructor(
+    public dialog: MatDialog,
     private pokemonService: PokemonService,
     private abilitiesService: AbilitiesService,
     private generationsService: GenerationsService,
@@ -80,7 +82,7 @@ export class PokemonListComponent {
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener)
   }
-  
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
@@ -148,5 +150,13 @@ export class PokemonListComponent {
 
   public getPokemonSpriteUrl(id: number): string {
     return this.pokemonService.getPokemonSpriteUrl(id)
+  }
+  
+  public openPokemonDetailsDialog(name: string) {
+    this.dialog.open(PokemonDetailsDialog, {
+      data: {
+        pokemon: name
+      }
+    });
   }
 }
