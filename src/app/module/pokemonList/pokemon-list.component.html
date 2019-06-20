@@ -100,7 +100,7 @@
             pokemon_species: filteredPokemonListForFilter.color}
           | orderBy : key : reverse
           | paginate: { itemsPerPage: mobileQuery.matches ? 10 : 50, currentPage: p }">
-          <button mat-raised-button (click)="openPokemonDetailsDialog(pokemon.pokemon_species.name)" [ngClass]="{'mode-pokeball': mode == 'pokeball','mode-loupe': mode == 'loupe'}">
+          <button mat-raised-button (click)="clickOnPokemon(pokemon.pokemon_species.name, pokemon.entry_number)" [ngClass]="{'mode-pokeball': mode == 'pokeball','mode-loupe': mode == 'loupe'}">
             <span class="pokemon-id">{{ pokemon.entry_number }}</span>
             <img [src]="getPokemonSpriteUrl(pokemon.entry_number)" [alt]="pokemon.pokemon_species.name" aria-hidden="true">
             <p>{{ pokemon.pokemon_species.name }}</p>

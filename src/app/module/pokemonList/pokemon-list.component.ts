@@ -6,7 +6,8 @@ import {
   GenerationsService,
   TypesService,
   ColorsService,
-  PokemonService
+  PokemonService,
+  InventoryService
 } from 'src/app/core/services';
 import { forkJoin, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -58,6 +59,7 @@ export class PokemonListComponent {
     private colorsService: ColorsService,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
+    private inventoryService: InventoryService,
   ) {
     this.selectList = {
       types: [],
@@ -94,7 +96,7 @@ export class PokemonListComponent {
     this.pokemonService.getAllPokemon().subscribe(
       response => {
         this.pokemonList = response
-        this.isLoading = false;
+        this.isLoading = false
       }
     )
   }
@@ -113,6 +115,27 @@ export class PokemonListComponent {
         this.selectList.colors = colorsResponse.results
       }
     )
+  }
+  
+  private openPokemonDetailsDialog(name: string) {
+    this.dialog.open(PokemonDetailsDialog, {
+      maxWidth: '100vw',
+      data: {
+        pokemon: name
+      }
+    });
+  }
+
+  private captureOnePokemon(id: number) {
+    this.inventoryService.savePokemon(id)
+  }
+
+  public clickOnPokemon(name: string, id: number) {
+    if (this.mode == 'pokeball') {
+      this.captureOnePokemon(id)
+    } else {
+      this.openPokemonDetailsDialog(name)
+    }
   }
 
   public abilityChange(filter) {
@@ -153,14 +176,5 @@ export class PokemonListComponent {
 
   public getPokemonSpriteUrl(id: number): string {
     return this.pokemonService.getPokemonSpriteUrl(id)
-  }
-  
-  public openPokemonDetailsDialog(name: string) {
-    this.dialog.open(PokemonDetailsDialog, {
-      maxWidth: '100vw',
-      data: {
-        pokemon: name
-      }
-    });
   }
 }

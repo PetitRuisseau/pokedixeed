@@ -9,7 +9,8 @@ import {
   AbilitiesService,
   GenerationsService,
   TypesService,
-  ColorsService
+  ColorsService,
+  InventoryService
 } from './core/services';
 import {
   PokemonListComponent,
@@ -67,6 +68,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     GenerationsService,
     TypesService,
     ColorsService,
+    InventoryService,
   ],
   bootstrap: [AppComponent]
 })
