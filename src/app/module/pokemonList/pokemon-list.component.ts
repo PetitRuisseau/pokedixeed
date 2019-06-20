@@ -38,6 +38,8 @@ export class PokemonListComponent {
     colors: string[],
     generations: string[],
   }
+
+  public mode: string;
   
   public isLoading: boolean = true;
   public sideNavOpened: boolean = false;
@@ -76,6 +78,7 @@ export class PokemonListComponent {
       colors: [],
       generations: [],
     }
+    this.mode = 'pokeball'
     this.loadPokemonList()
     this.loadSelectList()
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');

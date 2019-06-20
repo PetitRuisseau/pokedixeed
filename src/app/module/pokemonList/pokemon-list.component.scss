@@ -14,7 +14,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        flex-grow: 1;
         margin: 0;
         padding: 20px;
     }
@@ -33,6 +32,19 @@
             height: 120px;
             width: 120px;
             background: white;
+
+            &:hover::before {
+                content: '';
+                position: absolute;
+                z-index: 3;
+                height: 120px;
+                width: 120px;
+                opacity: 0.3;
+                background-size: 80px 80px;
+                background-repeat: no-repeat;
+                background-position: center;
+                animation: zoom 0.3s ease-in-out;
+            }
         }
 
         p {
@@ -47,7 +59,29 @@
             line-height: 1;
         }
     }
+
+    pagination-controls {
+        margin-top: auto;
+    }
 }
+
+.mode-pokeball::before {
+    background-image: url('../../../assets/img/pokeball.png');
+}
+
+.mode-loupe::before {
+    background-image: url('../../../assets/img/loupe.png');
+}
+
+@keyframes zoom {
+    0% {
+        background-size: 200px 200px;
+    }
+    100% {
+        background-size: 80px 80px;
+    }
+}
+
 mat-sidenav-content {
     .open-close-side-nav {
         height: 40px;
@@ -64,5 +98,11 @@ mat-sidenav-content {
         &.close {
             left: -40px;
         }
+    }
+}
+
+.mode-button {
+    img {
+        width: 50px;
     }
 }
