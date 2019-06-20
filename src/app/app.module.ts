@@ -17,6 +17,7 @@ import {
   FooterComponent,
   HeaderComponent,
   PokemonDetailsDialog,
+  InventoryComponent,
 } from './module';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -45,6 +46,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     FooterComponent,
     HeaderComponent,
     LoadingComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,
