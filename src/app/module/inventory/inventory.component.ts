@@ -8,25 +8,30 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent {
-  objectKeys = Object.keys;
   public inventoryList: number[];
-  public team = {
-      slot1: [],
-      slot2: [],
-      slot3: [],
-      slot4: [],
-      slot5: [],
-      slot6: [],
-    };
+  public team = {slot1:[],slot2:[],slot3:[],slot4:[],slot5:[],slot6:[]};
   constructor(
     private inventoryService: InventoryService,
     private pokemonService: PokemonService,
   ) {
     this.inventoryList = this.getInventoryList()
+    this.team = this.getTeam()
   }
 
   private getInventoryList(): number[] {
     return this.inventoryService.getInventoryList()
+  }
+
+  private getTeam() {
+    return this.inventoryService.getTeam()
+  }
+
+  private saveInventoryList(inventory) {
+    return this.inventoryService.saveInventoryList(inventory)
+  }
+
+  private saveTeam(team) {
+    return this.inventoryService.saveTeam(team)
   }
 
   public getPokemonSpriteUrl(id: number): string {
@@ -49,6 +54,8 @@ export class InventoryComponent {
           0,
           event.previousIndex);
       }
+      this.saveInventoryList(this.inventoryList)
+      this.saveTeam(this.team)
     }
   }
 }
