@@ -33,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoadingComponent } from './shared/component/loading/loading.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   entryComponents: [PokemonDetailsDialog],
@@ -62,6 +63,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    DragDropModule,
   ],
   providers: [
     PokeapiService,
