@@ -7,7 +7,7 @@
       </button>
 
       <mat-button-toggle-group name="order-by" aria-label="Order by">
-        <mat-button-toggle (click)="sort('entry_number')" value="id">
+        <mat-button-toggle checked (click)="sort('entry_number')" value="id">
           Pokemon ID
           <mat-icon *ngIf="key=='entry_number'&&!reverse" aria-hidden="false" aria-label="croissant">expand_less</mat-icon>
           <mat-icon *ngIf="key=='entry_number'&&reverse" aria-hidden="false" aria-label="decroissant">expand_more</mat-icon>
@@ -72,7 +72,18 @@
     </button>
     
     <section id="pokemon-list">
+
+      <mat-button-toggle-group class="mode-button" name="change mode" aria-label="change mode" [(ngModel)]="mode">
+        <mat-button-toggle checked value="pokeball">
+          <img src="assets/img/pokeball.png" alt="mode : attrapper un pokemon" aria-hidden="false">
+        </mat-button-toggle>
+        <mat-button-toggle value="loupe">
+          <img src="assets/img/loupe.png" alt="mode : connaitre des details sur un pokemon" aria-hidden="false">
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
       <loading-component *ngIf="isLoading" style="height: 100vh"></loading-component>
+
       <ul *ngIf="!isLoading">
         <li *ngFor="
           let pokemon of pokemonList
@@ -89,7 +100,7 @@
             pokemon_species: filteredPokemonListForFilter.color}
           | orderBy : key : reverse
           | paginate: { itemsPerPage: mobileQuery.matches ? 10 : 50, currentPage: p }">
-          <button mat-raised-button (click)="openPokemonDetailsDialog(pokemon.pokemon_species.name)">
+          <button mat-raised-button (click)="clickOnPokemon($event, pokemon.pokemon_species.name, pokemon.entry_number)" [ngClass]="{'mode-pokeball': mode == 'pokeball','mode-loupe': mode == 'loupe'}">
             <span class="pokemon-id">{{ pokemon.entry_number }}</span>
             <img [src]="getPokemonSpriteUrl(pokemon.entry_number)" [alt]="pokemon.pokemon_species.name" aria-hidden="true">
             <p>{{ pokemon.pokemon_species.name }}</p>
@@ -97,7 +108,7 @@
         </li>
       </ul>
 
-      <pagination-controls (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
+      <pagination-controls class="pokemon-list-pagination" (pageChange)="p = $event" autoHide="true" responsive="true"></pagination-controls>
 
     </section>
   </mat-sidenav-content>

@@ -9,13 +9,15 @@ import {
   AbilitiesService,
   GenerationsService,
   TypesService,
-  ColorsService
+  ColorsService,
+  InventoryService
 } from './core/services';
 import {
   PokemonListComponent,
   FooterComponent,
   HeaderComponent,
   PokemonDetailsDialog,
+  InventoryComponent,
 } from './module';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoadingComponent } from './shared/component/loading/loading.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   entryComponents: [PokemonDetailsDialog],
@@ -44,6 +47,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     FooterComponent,
     HeaderComponent,
     LoadingComponent,
+    InventoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    DragDropModule,
   ],
   providers: [
     PokeapiService,
@@ -67,6 +72,7 @@ import { LoadingComponent } from './shared/component/loading/loading.component';
     GenerationsService,
     TypesService,
     ColorsService,
+    InventoryService,
   ],
   bootstrap: [AppComponent]
 })

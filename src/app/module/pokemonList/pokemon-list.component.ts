@@ -6,7 +6,8 @@ import {
   GenerationsService,
   TypesService,
   ColorsService,
-  PokemonService
+  PokemonService,
+  InventoryService
 } from 'src/app/core/services';
 import { forkJoin, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,6 +39,8 @@ export class PokemonListComponent {
     colors: string[],
     generations: string[],
   }
+
+  public mode: string;
   
   public isLoading: boolean = true;
   public sideNavOpened: boolean = false;
@@ -56,7 +59,10 @@ export class PokemonListComponent {
     private colorsService: ColorsService,
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
-  ) {
+    private inventoryService: InventoryService,
+  ) {}
+
+  ngOnInit() {
     this.selectList = {
       types: [],
       abilities: [],
@@ -76,6 +82,7 @@ export class PokemonListComponent {
       colors: [],
       generations: [],
     }
+    this.mode = 'pokeball'
     this.loadPokemonList()
     this.loadSelectList()
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
@@ -91,7 +98,7 @@ export class PokemonListComponent {
     this.pokemonService.getAllPokemon().subscribe(
       response => {
         this.pokemonList = response
-        this.isLoading = false;
+        this.isLoading = false
       }
     )
   }
@@ -110,6 +117,28 @@ export class PokemonListComponent {
         this.selectList.colors = colorsResponse.results
       }
     )
+  }
+  
+  private openPokemonDetailsDialog(name: string) {
+    this.dialog.open(PokemonDetailsDialog, {
+      maxWidth: '100vw',
+      data: {
+        pokemon: name
+      }
+    });
+  }
+
+  private captureOnePokemon(id: number) {
+    this.inventoryService.savePokemon(id)
+  }
+
+  public clickOnPokemon(e: MouseEvent, name: string, id: number) {
+    if (this.mode == 'pokeball') {
+      this.captureOnePokemon(id)
+      this.pokeballAnimation(e)
+    } else {
+      this.openPokemonDetailsDialog(name)
+    }
   }
 
   public abilityChange(filter) {
@@ -151,13 +180,14 @@ export class PokemonListComponent {
   public getPokemonSpriteUrl(id: number): string {
     return this.pokemonService.getPokemonSpriteUrl(id)
   }
-  
-  public openPokemonDetailsDialog(name: string) {
-    this.dialog.open(PokemonDetailsDialog, {
-      maxWidth: '100vw',
-      data: {
-        pokemon: name
-      }
+
+  private pokeballAnimation(e: MouseEvent) {
+    let pokeball = document.createElement('div');
+    pokeball.className = 'pokeball-animation';
+    pokeball.style.top = e.clientY + 'px'
+    pokeball.style.left = e.clientX + 'px'
+    document.body.appendChild(pokeball).addEventListener("animationend", () => {
+      document.body.removeChild(pokeball)
     });
   }
 }

@@ -1,1 +1,8 @@
-<header></header>
+<header>
+    <a [routerLink]="['inventory']" routerLinkActive="display-none"  mat-mini-fab>
+        <img src="assets/img/backpackpng.png" alt="inventory" aria-hidden="false">
+    </a>
+    <a [routerLink]="['pokemon-list']" routerLinkActive="display-none" mat-mini-fab>
+        <mat-icon aria-hidden="false" aria-label="list">list</mat-icon>
+    </a>
+</header>

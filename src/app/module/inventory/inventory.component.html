@@ -1,0 +1,80 @@
+<section class="team">
+    <div
+        cdkDropList 
+        id="slot1"
+        [cdkDropListData]="team.slot1" 
+        [cdkDropListConnectedTo]="[inventory,'slot2','slot3','slot4','slot5','slot6']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot1" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+    <div
+        cdkDropList 
+        id="slot2"
+        [cdkDropListData]="team.slot2" 
+        [cdkDropListConnectedTo]="[inventory, 'slot1','slot3','slot4','slot5','slot6']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot2" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+    <div
+        cdkDropList 
+        id="slot3"
+        [cdkDropListData]="team.slot3" 
+        [cdkDropListConnectedTo]="[inventory, 'slot1','slot2','slot4','slot5','slot6']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot3" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+    <div
+        cdkDropList 
+        id="slot4"
+        [cdkDropListData]="team.slot4" 
+        [cdkDropListConnectedTo]="[inventory, 'slot1','slot2','slot3','slot5','slot6']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot4" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+    <div
+        cdkDropList 
+        id="slot5"
+        [cdkDropListData]="team.slot5" 
+        [cdkDropListConnectedTo]="[inventory, 'slot1','slot2','slot3','slot4','slot6']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot5" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+    <div
+        cdkDropList 
+        id="slot6"
+        [cdkDropListData]="team.slot6" 
+        [cdkDropListConnectedTo]="[inventory, 'slot1','slot2','slot3','slot4','slot5']" 
+        (cdkDropListDropped)="drop($event)"
+        class="team-slot" >
+        <button mat-raised-button cdkDrag *ngFor="let pokemon of team.slot6" class="pokemon">
+            <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+        </button>
+    </div>
+</section>
+<section 
+    #inventory="cdkDropList"
+    cdkDropListSortingDisabled 
+    cdkDropListOrientation="horizontal" 
+    cdkDropList (cdkDropListDropped)="drop($event)" 
+    [cdkDropListData]="inventoryList"
+    [cdkDropListConnectedTo]="['slot1','slot2','slot3','slot4','slot5','slot6']" 
+    class="inventory-list">
+    <button mat-raised-button cdkDrag *ngFor="let pokemon of inventoryList" class="pokemon">
+        <img [src]="getPokemonSpriteUrl(pokemon)" [alt]="pokemon" aria-hidden="true">
+    </button>
+</section>
