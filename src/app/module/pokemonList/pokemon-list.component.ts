@@ -60,7 +60,9 @@ export class PokemonListComponent {
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private inventoryService: InventoryService,
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.selectList = {
       types: [],
       abilities: [],
@@ -130,9 +132,10 @@ export class PokemonListComponent {
     this.inventoryService.savePokemon(id)
   }
 
-  public clickOnPokemon(name: string, id: number) {
+  public clickOnPokemon(e: MouseEvent, name: string, id: number) {
     if (this.mode == 'pokeball') {
       this.captureOnePokemon(id)
+      this.pokeballAnimation(e)
     } else {
       this.openPokemonDetailsDialog(name)
     }
@@ -176,5 +179,15 @@ export class PokemonListComponent {
 
   public getPokemonSpriteUrl(id: number): string {
     return this.pokemonService.getPokemonSpriteUrl(id)
+  }
+
+  private pokeballAnimation(e: MouseEvent) {
+    let pokeball = document.createElement('div');
+    pokeball.className = 'pokeball-animation';
+    pokeball.style.top = e.clientY + 'px'
+    pokeball.style.left = e.clientX + 'px'
+    document.body.appendChild(pokeball).addEventListener("animationend", () => {
+      document.body.removeChild(pokeball)
+    });
   }
 }

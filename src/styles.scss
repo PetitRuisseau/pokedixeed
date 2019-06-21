@@ -2,3 +2,42 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.pokeball-animation {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background-image: url('assets/img/pokeball.png');
+    background-size: 80px 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translate(-50px, -50px);
+    z-index: 5;
+    animation: 4s pokeballgo;
+}
+
+@keyframes pokeballgo {
+    0% {
+        transform: translate(-50px, -50px) scale(2, 2);
+    }
+    
+    10% {
+        transform: translate(-50px, -50px) scale(1, 1) rotate(0turn);
+    }
+    20% {
+        transform: translate(-40px, -50px) rotate(0.1turn);
+    }
+    30% {
+        transform: translate(-60px, -50px) rotate(-0.1turn);
+    }
+    40% {
+        transform: translate(-50px, -50px) scale(1, 1) rotate(0turn);
+    }
+    50% {
+        transform: translate(-50px, -50px) scale(1, 1) rotate(0turn);
+    }
+    100% {
+        transform: translate(-50px, -50000px) rotate(0turn);
+    }
+}
