@@ -2,6 +2,11 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+
+    mat-button-toggle-group,
+    mat-form-field {
+        margin-bottom: 20px;
+    }
 }
 
 #pokemon-list {
@@ -101,9 +106,17 @@ mat-sidenav-content {
     }
 }
 
+mat-sidenav-container .open-close-side-nav {
+    margin: 0 0 20px auto;
+}
+
 .mode-button {
     img {
         width: 30px;
         margin: 10px;
     }
+}
+
+.pokemon-list-pagination /deep/ .ngx-pagination .current {
+    background: #ff4081;
 }
